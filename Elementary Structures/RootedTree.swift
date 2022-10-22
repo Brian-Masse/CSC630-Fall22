@@ -42,7 +42,7 @@ func pow(_ int1: Int, _ int2: Int) -> Int {
 // Modeled After a Binary Tree
 class RootedTree<T: Hashable> where T: Comparable {
 
-    let fill = "." // the character used for empty space in the render of the tree
+    let fill = "-" // the character used for empty space in the render of the tree
 
     var root: Node<T>!
 
@@ -185,6 +185,10 @@ class RootedTree<T: Hashable> where T: Comparable {
         static func == (lhs: Node, rhs: Node) -> Bool {
             lhs.data == rhs.data
         }
+
+
+
+
 
         public static func < (lhs: Node, rhs: Node) -> Bool {
             lhs.data < rhs.data
