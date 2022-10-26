@@ -46,6 +46,15 @@ class Node {
         self.name = name
         self.children = children
     }
+
+    func topologicalSort(_ string: inout String)  {
+        if self.children.isEmpty { string += "-> \(self.name) "; return }
+        else {
+            for child in children { child.topologicalSort(&string) }
+            string += "-> \(self.name) "
+            return
+        }
+    }
 }
 
 class Tree {
@@ -100,6 +109,14 @@ class Tree {
         return string
     }   
 
+    func topologicalSort2() -> String {
+        var string: String = ""
+
+        root.topologicalSort(&string)
+
+        return string
+    }
+
     func topologicalSort() -> String {
 
         // in this case, the string acts as the topological stack (reversed). The stack variable is a private stack used to facilitate the motion of this algorithm
@@ -110,8 +127,6 @@ class Tree {
         while !stack.isEmpty {
             let head = stack.last!
             head.visited = true
-
-            print(head.name)
 
             if head.children.allSatisfy({ $0.visited }) { 
                 string.append( "-> \(head.name) " ) 
@@ -143,6 +158,7 @@ let tree = Tree( A )
 // print(tree.breadthFirstSearch(name: "E"))
 // print(tree.depthFirstSearch(name: "E"))
 // print(tree.topologicalSort())
+// print(tree.topologicalSort2() )
 
 
 
