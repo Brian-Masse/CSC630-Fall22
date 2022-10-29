@@ -155,7 +155,7 @@ let A = Node("A", [B, C])
 let tree = Tree( A )
 
 // testing: 
-// print(tree.breadthFirstSearch(name: "E"))
+print(tree.breadthFirstSearch(name: "E"))
 // print(tree.depthFirstSearch(name: "E"))
 // print(tree.topologicalSort())
 // print(tree.topologicalSort2() )

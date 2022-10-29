@@ -1,5 +1,6 @@
 import string
 
+
 class LinkedListNode:
 
     def __init__(self, data):
