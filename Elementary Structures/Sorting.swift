@@ -37,7 +37,7 @@ func slice<T: Equatable>( _ array: [T], from int1: Int, to int2: Int) -> [T] { A
 
 var testRange = [ 99, 101, 1, 7, 22, 5, 54, 77, 21 ]
 
-func insertionSort(_ array: inout [Int]) {
+func insertionSort(_ array: inout [Float]) {
 
     for i in 0...array.count - 1 {
 
@@ -225,6 +225,53 @@ func heapSort( _ array: inout [Int] ) {
 
 
 
+// BUCKET SORT:
 
+// runs in O(n) time
+// requires that every element in the array is bound by [0, 1)
 
+// Divides the interval [0, 1) into n sub-intervals (buckets)
+// Puts each element of A into a corresponding bucket
+// Sorts each of the buckets
+// Lists each bucket, and all its elements in order to return the final bucket
 
+// Example 
+
+func BucketSort( _ array: [Float] ) -> [Float] {
+
+    var buckets: [[Float]] = []
+    var max = array.first!
+    for item in array { 
+        if item > max { max = item } 
+        
+        buckets.append( [] )
+    }
+
+    for item in array { 
+        let value = item / (max + 1)
+    
+        var index = value * 10
+        index.round(FloatingPointRoundingRule.down)
+
+        buckets[ Int(index) ].append( value )
+    }
+    
+    var returning: [Float] = []
+    for i in 0..<buckets.count {
+        if !buckets[i].isEmpty { 
+            insertionSort( &buckets[i] )
+
+            for f in 0..<buckets[i].count {
+                buckets[i][f] *= (max + 1)
+                returning.append( buckets[i][f] )
+            }
+        }
+    }
+    return returning
+}
+
+var floatTest: [Float] = [ 4, 1, 3, 2, 16, 9, 10, 14, 8, 7 ]
+print( BucketSort( floatTest ) )
+insertionSort( &floatTest )
+
+print(floatTest)
